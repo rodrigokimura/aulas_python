@@ -16,7 +16,12 @@ def obter_montante(saldo_inicial, meses, rendimento, tipo_juros):
     >>> obter_montante(100, 2, 1.0, 'composto')
     400.0
     """
-    pass
+    estrategias = {
+        "simples": obter_montante_rendimento_simples,
+        "composto": obter_montante_rendimento_composto,
+    }
+
+    return estrategias[tipo_juros](saldo_inicial, meses, rendimento)
 
 
 def obter_montante_rendimento_simples(saldo_inicial, meses, rendimento):
@@ -28,7 +33,7 @@ def obter_montante_rendimento_simples(saldo_inicial, meses, rendimento):
     >>> obter_montante_rendimento_simples(100, 5, 0.01)
     105.0
     """
-    pass
+    return saldo_inicial + saldo_inicial * meses * rendimento
 
 
 def obter_montante_rendimento_composto(saldo_inicial, meses, rendimento):
@@ -40,4 +45,6 @@ def obter_montante_rendimento_composto(saldo_inicial, meses, rendimento):
     >>> obter_montante_rendimento_composto(100, 2, 1.0)
     400.0
     """
-    pass
+    for _ in range(meses):
+        saldo_inicial += saldo_inicial * rendimento
+    return saldo_inicial
