@@ -100,13 +100,13 @@ stack.pop()
 stack.pop()
 
 # lista como filas
-stack = [3, 4, 5]
-stack.append(6)
-stack.append(7)
+queue = [3, 4, 5]
+queue.append(6)
+queue.append(7)
 
-stack.pop(0)
-stack.pop(0)
-stack.pop(0)
+queue.pop(0)
+queue.pop(0)
+queue.pop(0)
 
 # ou usando deque (mais eficiente)
 
