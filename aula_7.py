@@ -41,15 +41,35 @@ class Alocacao:
 class Carteira:
     def __init__(self, composicao: list[Alocacao]) -> None:
         self.composicao = composicao
+    
+    @classmethod
+    def from_list(cls, investimentos: list[dict[str, int | str]]) -> None:
+        composicao = [Alocacao(i.get("investimento"), i.get("percentual")) for i in investimentos]
+        return cls(composicao)
 
     def obter_rentabilidade(self):
         return sum(i.investimento.rentabilidade * i.percentual for i in self.composicao)
+
+class SuperCarteira(Carteira):
+    pass
+
 
 
 investimento_x = Investimento("asdf", 0.1)
 investimento_y = Investimento("qewr", 0.2)
 
-carteira = Carteira([Alocacao(investimento_x, 0.5), Alocacao(investimento_y, 0.5)])
+# carteira = Carteira([Alocacao(investimento_x, 0.5), Alocacao(investimento_y, 0.5)])
+carteira = Carteira.from_list(
+    [
+        {"investimento": investimento_x, "percentual": 0.5},
+        {"investimento": investimento_y, "percentual": 0.5},
+    ])
+
+super_carteira = SuperCarteira.from_list([
+        {"investimento": investimento_x, "percentual": 0.5},
+        {"investimento": investimento_y, "percentual": 0.5},
+    ])
+
 rentabilidade_da_carteira = carteira.obter_rentabilidade()
 
 
